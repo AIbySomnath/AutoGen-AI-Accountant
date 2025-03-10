@@ -1,5 +1,6 @@
 import requests
 from config import GROQ_API_BASE, GROQ_API_KEY, GROQ_MODEL_ID
+import logging
 
 class DeepSeekAgent:
     def __init__(self):
@@ -18,7 +19,10 @@ class DeepSeekAgent:
             "max_tokens": 150,
             "temperature": 0.7
         }
-        response = requests.post(url, headers=headers, json=payload)
-        if response.status_code == 200:
+        try:
+            response = requests.post(url, headers=headers, json=payload)
+            response.raise_for_status()
             return response.json().get("choices", [{}])[0].get("text", "")
-        return ""
+        except requests.RequestException as e:
+            logging.error(f"Failed to get summary from DeepSeek: {e}")
+            return ""

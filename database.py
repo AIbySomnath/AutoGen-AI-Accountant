@@ -1,9 +1,9 @@
-import psycopg2
+import mysql.connector
 import pandas as pd
 from config import DB_CONFIG
 
 def execute_query(query):
-    conn = psycopg2.connect(**DB_CONFIG)
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
     
     cursor.execute(query)

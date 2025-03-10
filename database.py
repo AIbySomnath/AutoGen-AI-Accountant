@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, text, Column, Integer, String, Float, Date, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Float, Date, ForeignKey, text
 from sqlalchemy.orm import sessionmaker, declarative_base
 import pandas as pd
 from config import DB_CONFIG
@@ -80,14 +80,17 @@ class AccountSummary(Base):
 
 engine = create_engine(DB_CONFIG['database_url'])
 Session = sessionmaker(bind=engine)
-session = Session()
 
 def execute_query(query):
-    logging.info(f"Executing query: {query}")
-    result = session.execute(text(query))
-    data = result.fetchall()
-    df = pd.DataFrame(data, columns=result.keys())
-    return df
+    session = Session()
+    try:
+        logging.info(f"Executing query: {query}")
+        result = session.execute(text(query))
+        data = result.fetchall()
+        df = pd.DataFrame(data, columns=result.keys())
+        return df
+    finally:
+        session.close()
 
 # Create tables
 Base.metadata.create_all(engine)

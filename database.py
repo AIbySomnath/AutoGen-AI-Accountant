@@ -1,17 +1,12 @@
-import mysql.connector
+from sqlalchemy import create_engine, text
 import pandas as pd
 from config import DB_CONFIG
 
+engine = create_engine(DB_CONFIG['database_url'])
+
 def execute_query(query):
-    conn = mysql.connector.connect(**DB_CONFIG)
-    cursor = conn.cursor()
-    
-    cursor.execute(query)
-    data = cursor.fetchall()
-    
-    df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
-    
-    cursor.close()
-    conn.close()
-    
+    with engine.connect() as connection:
+        result = connection.execute(text(query))
+        data = result.fetchall()
+        df = pd.DataFrame(data, columns=result.keys())
     return df

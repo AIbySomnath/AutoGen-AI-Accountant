@@ -1,0 +1,6 @@
+streamlit
+smolagents
+sqlalchemy
+psycopg2
+pandas
+requests

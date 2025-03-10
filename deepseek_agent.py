@@ -20,5 +20,5 @@ class DeepSeekAgent:
         }
         response = requests.post(url, headers=headers, json=payload)
         if response.status_code == 200:
-            return response.json().get("choices", [{}])[0].get("text", "Summary generation failed.")
-        return "Summary generation failed."
+            return response.json().get("choices", [{}])[0].get("text", "")
+        return ""

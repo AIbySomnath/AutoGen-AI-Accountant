@@ -1,6 +1,6 @@
-DEEPSEEK_MODEL_ID = "deepseek-r1-distill-qwen-7b"
-DEEPSEEK_API_BASE = "http://127.0.0.1:1234/v1"
-DEEPSEEK_API_KEY = "lm-studio"
+GROQ_MODEL_ID = "llama3-7b"
+GROQ_API_BASE = "https://api.groq.com"
+GROQ_API_KEY = "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"
 
 DB_CONFIG = {
     "dbname": "mydb_x6y1",

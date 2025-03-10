@@ -1,6 +1,6 @@
 streamlit
 smolagents
 sqlalchemy
-psycopg2
+pygments==2.19.1
 pandas
 requests

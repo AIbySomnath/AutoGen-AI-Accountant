@@ -21,7 +21,10 @@ agent1 = Agent1()
 query = st.text_input("Enter your request (e.g., 'Give me the account summary for the current month'):")
 
 if st.button("Submit") and query:
-    raw_data, summary = agent1.process_request(query)
+    raw_data, summary, sql_query = agent1.process_request(query)
+    
+    st.subheader("SQL Query:")
+    st.code(sql_query)
     
     st.subheader("Raw Data:")
     st.write(raw_data)

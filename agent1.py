@@ -5,5 +5,5 @@ class Agent1:
         self.agent2 = Agent2()
 
     def process_request(self, user_request):
-        raw_data, summary = self.agent2.generate_summary(user_request)
-        return raw_data, summary
+        raw_data, summary, sql_query = self.agent2.generate_summary(user_request)
+        return raw_data, summary, sql_query
